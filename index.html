@@ -4,243 +4,523 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Nayan | Developer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
-        /* Base Variables and Reset */
+        /* --- CSS VARIABLES (The "Alex" Theme) --- */
         :root {
-            --primary-color: #007bff;
-            /* Blue */
-            --secondary-color: #6c757d;
-            /* Gray */
-            --background-color: #f8f9fa;
-            /* Light Gray/Off-White */
-            --text-color: #212529;
-            /* Dark Gray/Black */
-            --light-background: #ffffff;
+            --primary-color: #00e676;
+            /* Neon Green from reference */
+            --bg-dark: #101010;
+            /* Deep Black background */
+            --bg-card: #1e1e1e;
+            /* Slightly lighter for cards */
+            --text-white: #ffffff;
+            --text-gray: #a1a1a1;
+            --gradient: linear-gradient(135deg, #00e676 0%, #00c853 100%);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding-top: 70px;
-            /* Space for the fixed navigation */
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
-            color: var(--primary-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: inherit;
         }
 
-        a:hover {
-            color: #0056b3;
-            /* Darker blue on hover */
+        ul {
+            list-style: none;
         }
 
-        section {
-            padding: 40px 5%;
-            margin-bottom: 20px;
-            background-color: var(--light-background);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* --- Navigation Bar Styling --- */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-white);
+            color: #000;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(16, 16, 16, 0.95);
+            padding: 20px 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+        }
+
         nav {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background-color: var(--light-background);
-            padding: 15px 5%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            /* Make the navbar sticky */
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            align-items: center;
         }
 
-        .nav-logo {
+        .logo {
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 28px;
             color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
         }
 
         .nav-links a {
-            margin-left: 25px;
-            font-weight: 600;
-            color: var(--text-color);
-            padding: 5px 0;
-            position: relative;
+            color: var(--text-white);
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
-        /* Underline animation for nav links */
-        .nav-links a::after {
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            /* Changed to min-height for better mobile layout */
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        /* Background Design Elements (Blobs) */
+        .hero::before {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            display: block;
-            margin-top: 5px;
+            top: 10%;
             right: 0;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-            left: 0;
-            background: var(--primary-color);
-        }
-
-        /* --- About Section Styling --- */
-        .about-section {
+        .hero-content {
             display: flex;
             align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            /* Allow wrapping on smaller screens */
-            padding-top: 60px;
-            /* Extra padding to feel like a hero section */
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap-reverse;
+            /* Wrap reverse for mobile so text is above image */
         }
 
-        .about-text {
-            flex: 1 1 500px;
-            /* Allows text to grow and shrink */
-            padding: 0;
-            /* Removed previous border and padding */
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .about-text h2 {
-            font-size: 32px;
+        .hero-subtitle {
             color: var(--primary-color);
-            margin-top: 0;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .about-image {
-            flex-shrink: 0;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-desc {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-img-container {
+            flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 5px solid var(--primary-color);
-            box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.2);
+            position: relative;
+            min-width: 300px;
+            margin-bottom: 30px;
+            /* Adjusted spacing */
         }
 
-        .about-image img {
-            width: 100%;
-            height: 100%;
+        /* UPDATED: CIRCULAR IMAGE STYLES */
+        .hero-img {
+            width: 400px;
+            /* Must be square */
+            height: 400px;
+            /* Must be square */
             object-fit: cover;
+            border-radius: 50%;
+            /* Makes it a circle */
+            z-index: 2;
+            border: 3px solid var(--primary-color);
+            /* Changed shadow to a glow effect for the circle */
+            box-shadow: 0px 0px 30px rgba(0, 230, 118, 0.3);
         }
 
-        /* --- Credentials Section Styling --- */
-        .credentials-section h2 {
-            font-size: 28px;
-            color: var(--text-color);
-            border-left: 5px solid var(--primary-color);
-            padding-left: 10px;
-            margin-bottom: 25px;
+        /* --- ABOUT ME --- */
+        .about {
+            padding: 100px 0;
+            background: var(--bg-dark);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-info h3 {
+            font-size: 2rem;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            /* Reset the border styles from the original CSS */
-            border: 1px solid #dee2e6;
         }
 
-        th,
-        td {
-            padding: 12px 15px;
-            text-align: left;
-            border: 1px solid #dee2e6;
+        .about-info p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
         }
 
-        thead tr {
-            background-color: var(--primary-color);
-            color: white;
-            text-transform: uppercase;
-            font-size: 14px;
+        .info-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        tbody tr:hover {
-            background-color: #e9ecef;
+        .info-item i {
+            color: var(--primary-color);
+            width: 20px;
+            /* Fixed width for alignment */
         }
 
-        td a {
-            font-weight: 600;
+        /* --- SERVICES (WORK) --- */
+        .services {
+            padding: 100px 0;
+            background: #0d0d0d;
         }
 
-        /* --- Projects Section Styling --- */
-        .projects-section {
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            /* Responsive grid */
-            gap: 20px;
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 10px;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 3px solid var(--primary-color);
+            background: #252525;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- PROJECTS --- */
+        .projects {
+            padding: 100px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .project-card {
-            background-color: var(--background-color);
-            padding: 30px 20px;
-            text-align: center;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
         }
 
-        /* Project Card Hover Animation */
         .project-card:hover {
-            transform: translateY(-5px);
-            /* Lift effect */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-            background-color: #e6f2ff;
-            /* Very light blue background */
-            color: var(--primary-color);
+            transform: scale(1.02);
         }
 
-        /* --- Media Queries for Responsiveness --- */
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #1e1e1e, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 3rem;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h4 {
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- CONTACT --- */
+        .contact {
+            padding: 100px 0;
+            background: #0d0d0d;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            flex: 1.5;
+            min-width: 300px;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-dark);
+            border: 1px solid #333;
+            color: var(--text-white);
+            border-radius: 5px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control::placeholder {
+            color: #666;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-img {
+                width: 350px;
+                height: 350px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .about-section {
-                justify-content: center;
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero {
                 text-align: center;
+                padding-top: 120px;
             }
 
-            .about-text {
-                margin-right: 0;
+            /* Adjusted image size for mobile */
+            .hero-img {
+                width: 280px;
+                height: 280px;
+                margin-top: 20px;
             }
 
-            .nav-links a {
-                margin-left: 15px;
-                font-size: 14px;
+            .hero-content {
+                flex-direction: column-reverse;
             }
 
-            body {
-                padding-top: 10px;
-                /* Reduce padding for smaller screens if nav is not fixed */
+            /* Ensure image is above text on mobile */
+            .about-grid {
+                grid-template-columns: 1fr;
             }
 
-            nav {
-                position: relative;
-                /* Unfix the nav on small screens */
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                display: none;
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
             }
         }
     </style>
@@ -248,115 +528,246 @@
 
 <body>
 
-    <nav>
-        <div class="nav-logo">MY PORTFOLIO</div>
-        <div class="nav-links">
-            <a href="#about">ABOUT ME</a>
-            <a href="#credentials">CREDENTIALS</a>
-            <a href="#projects">MY PROJECTS</a>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Nayan<span style="color:var(--primary-color)">.</span></div>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+                    <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                    <li><a href="#contact" class="btn" style="padding: 8px 20px; color: black;"
+                            onclick="toggleMenu()">Let's Talk</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <section id="about" class="about-section">
-        <div class="about-text">
-            <h2>ABOUT ME:</h2>
-            <p>I am currently pursuing BCA Semester 4 and am seeking an internship in an IT company where I can
-                apply
-                and grow my
-                technical skills. I enjoy creating logic, writing scripts, and building programs. I have experience with
-                JavaScript, a
-                basic understanding of jQuery, and knowledge of C, C++, and HTML. While I focus on problem
-                solving and
-                development tasks,
-                I can contribute effectively. I have provided additional personal and academic details below.
-            </p>
-            <p>
-                My core strength lies in back-end logic and scripting, eager to jump into a role focused on
-                development.
-            </p>
-        </div>
-        <div class="about-image">
-            <img src="image.jpg" alt="
-
-[Image of a professional software developer student]
-">
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-subtitle">HELLO, I'M</span>
+                <h1 class="hero-title">Game & Web <br><span style="color: var(--primary-color);">Developer</span></h1>
+                <p class="hero-desc">
+                    I am Nayan, a freelance developer based in Gujarat. I specialize in creating personal portfolio
+                    websites and immersive web experiences for clients to showcase their work to the world.
+                </p>
+                <a href="#contact" class="btn">Hire Me</a>
+                <a href="#projects" class="btn-outline" style="margin-left: 10px;">View Work</a>
+            </div>
+            <div class="hero-img-container">
+                <img src="image.jpg" alt="Nayan Profile" class="hero-img">
+            </div>
         </div>
     </section>
 
-    <section id="credentials" class="credentials-section">
-        <h2>CREDENTIALS:</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>DOCUMENT</th>
-                    <th>YEAR</th>
-                    <th>LINK</th>
-                    <th>MARKS OR PERCENTAGE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10TH RESULT</td>
-                    <td>March-2022</td>
-                    <td><a href="https://drive.google.com/file/d/1LElUK6b84KdrvzNtH-SQ3dwOvX7UL5EH/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>76%</td>
-                </tr>
-                <tr>
-                    <td>12TH RESULT</td>
-                    <td>March-2024</td>
-                    <td><a href="https://drive.google.com/file/d/1-sJh_ZJiQAs_dEpdo6vNNYcHs5SFk981/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>72%</td>
-                </tr>
-                <tr>
-                    <td>BCA SEM 1 RESULT</td>
-                    <td>Nov-2024</td>
-                    <td><a href="https://drive.google.com/file/d/16JGCBgWVBp8Gex15qnHXfZ0jn4j-f9BQ/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>SGPA: 7.73</td>
-                </tr>
-                <tr>
-                    <td>BCA SEM 2 RESULT</td>
-                    <td>Apr-2025</td>
-                    <td><a href="https://drive.google.com/file/d/1azJcUpe2Wza4TNp_w1WuWqvCS5ZpzUim/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>SGPA: 7.55</td>
-                </tr>
-                <tr>
-                    <td>BCA SEM 3 RESULT</td>
-                    <td>Sep-2025</td>
-                    <td><a href="https://drive.google.com/file/d/1WX8PSBSSrf63ey5sf52SCmjLVtBiK0rM/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>SGPA: 6.82</td>
-                </tr>
-                <tr>
-                    <td>MARKETING COURSE</td>
-                    <td>2025</td>
-                    <td><a href="https://drive.google.com/file/d/1X06Xs8SGTiHUktYhRiEEiTCIzI7dLTcw/view?usp=sharing"
-                            target="_blank">View</a></td>
-                    <td>Certificate</td>
-                </tr>
-            </tbody>
-        </table>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual"
+                    style="background: #1e1e1e; height: 350px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid #333; position:relative; overflow:hidden;">
+                    <i class="fas fa-code" style="font-size: 6rem; color: #2a2a2a;"></i>
+                    <div
+                        style="position:absolute; bottom: 20px; left: 20px; color: var(--primary-color); font-weight:700; font-size: 1.2rem;">
+                        Building the future<br>line by line.</div>
+                </div>
+
+                <div class="about-info">
+                    <span class="hero-subtitle">ABOUT ME</span>
+                    <h3>Hardwork & Perseverance</h3>
+                    <p>
+                        I am a passionate Game Developer and Web Developer currently focused on creating professional
+                        personal portfolio websites for my clients. I use modern tools and AI assistance to bring ideas
+                        to life efficiently, ensuring every project is unique and tailored to your specific needs.
+                    </p>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <i class="fas fa-user"></i> <span><strong>Name:</strong> Nayan</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i> <span><strong>Location:</strong> Junagadh, Gujarat,
+                                India</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i> <span><strong>Email:</strong>
+                                nayan.suva.ahir.0369@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i> <span><strong>Phone:</strong> +91 9909591501</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn-outline">Contact Me</a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="projects" class="projects-section">
-        <h2>MY PROJECTS:</h2>
-        <a href="https://nayansuva03.github.io/weather_app/" target="_blank" class="project-card">
-            <h3>WEATHER APP</h3>
-            <p>Built with JavaScript, fetching live weather data.</p>
-        </a>
-        <a href="https://nayansuva03.github.io/currency-converter/" target="_blank" class="project-card">
-            <h3>CURRENCY CONVERTER</h3>
-            <p>Real-time currency exchange calculator.</p>
-        </a>
-        <a href="https://tictectoe-nayansuva.netlify.app/" target="_blank" class="project-card">
-            <h3>TIC TAC TOE GAME</h3>
-            <p>With two modes pvc and pvp.</p>
-        </a>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="hero-subtitle">WHAT I DO</span>
+                <h2 class="section-title">My <span>Services</span></h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h4>AI-Assisted Web Dev</h4>
+                    <p>Building faster and smarter websites by leveraging the power of latest Artificial Intelligence
+                        tools to optimize code and design workflows.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-swatchbook"></i></div>
+                    <h4>Portfolio Creation & Customization</h4>
+                    <p>I create and fully customize personal portfolio websites according to your specific requirements
+                        to match your brand identity.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bug-slash"></i></div>
+                    <h4>Bug Fixing & Changes</h4>
+                    <p>Having trouble with your current site? I identify and fix bugs, make necessary changes, and
+                        ensure smooth functionality based on client requests.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fab fa-figma"></i></div>
+                    <h4>Figma to Website</h4>
+                    <p>I convert your Figma designs into pixel-perfect, responsive HTML/CSS/JS code ready for
+                        deployment.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="hero-subtitle">PORTFOLIO</span>
+                <h2 class="section-title">Recent <span>Projects</span></h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-gamepad"></i></div>
+                    <div class="project-info">
+                        <h4>Gaming Community Portal</h4>
+                        <p>A dynamic hub for gamers with profiles and news feed.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-palette"></i></div>
+                    <div class="project-info">
+                        <h4>Artist Portfolio Site</h4>
+                        <p>A minimalist gallery portfolio for a digital artist.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-code"></i></div>
+                    <div class="project-info">
+                        <h4>Developer Resume Site</h4>
+                        <p>A clean, responsive online CV and skills showcase.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-camera-retro"></i></div>
+                    <div class="project-info">
+                        <h4>Photography Showcase</h4>
+                        <p>A full-screen image slider portfolio for a photographer.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-briefcase"></i></div>
+                    <div class="project-info">
+                        <h4>Small Business Landing Page</h4>
+                        <p>A conversion-focused single page for local services.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-layer-group"></i></div>
+                    <div class="project-info">
+                        <h4>SaaS Product Page</h4>
+                        <p>Modern landing page demonstrating a software product.</p>
+                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="hero-subtitle">GET IN TOUCH</span>
+                <h2 class="section-title">Contact <span>Me</span></h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email Me</h4>
+                            <p style="word-break: break-all;">nayan.suva.ahir.0369@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4>Call Me</h4>
+                            <p>+91 9909591501</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h4>Whatsapp</h4>
+                            <p>+91 9909591501</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" action="https://formsubmit.co/nayan.suva.ahir.0369@gmail.com" method="POST">
+                    <input type="text" name="_honey" style="display:none">
+
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Nayan. All Rights Reserved. Designed with <i class="fas fa-heart"
+                    style="color:var(--primary-color)"></i> in Junagadh, Gujarat.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 
 </html>
