@@ -12,14 +12,13 @@
         /* --- CSS VARIABLES (The "Alex" Theme) --- */
         :root {
             --primary-color: #00e676;
-            /* Neon Green from reference */
+            /* Neon Green */
             --bg-dark: #101010;
             /* Deep Black background */
             --bg-card: #1e1e1e;
             /* Slightly lighter for cards */
             --text-white: #ffffff;
             --text-gray: #a1a1a1;
-            --gradient: linear-gradient(135deg, #00e676 0%, #00c853 100%);
             --transition: all 0.3s ease;
         }
 
@@ -65,12 +64,15 @@
             color: var(--primary-color);
         }
 
+        /* --- BUTTON STYLES UPDATED --- */
+        /* Primary Button (Green) */
         .btn {
             display: inline-block;
             background: var(--primary-color);
             color: #000;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 30px;
+            /* Added Radius */
             font-weight: 600;
             transition: var(--transition);
             border: 2px solid var(--primary-color);
@@ -80,17 +82,28 @@
         .btn:hover {
             background: transparent;
             color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--text-white);
-            border: 2px solid var(--text-white);
+        /* Secondary Button (White Background, Black Text) */
+        .btn-white {
+            display: inline-block;
+            background: #ffffff;
+            color: #000000;
+            padding: 12px 30px;
+            border-radius: 30px;
+            /* Added Radius */
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid #ffffff;
+            cursor: pointer;
         }
 
-        .btn-outline:hover {
-            background: var(--text-white);
+        .btn-white:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
             color: #000;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         /* --- HEADER --- */
@@ -120,6 +133,7 @@
         .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
 
         .nav-links a {
@@ -141,7 +155,6 @@
         /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
-            /* Changed to min-height for better mobile layout */
             display: flex;
             align-items: center;
             position: relative;
@@ -149,7 +162,6 @@
             padding-bottom: 50px;
         }
 
-        /* Background Design Elements (Blobs) */
         .hero::before {
             content: '';
             position: absolute;
@@ -167,7 +179,6 @@
             justify-content: space-between;
             width: 100%;
             flex-wrap: wrap-reverse;
-            /* Wrap reverse for mobile so text is above image */
         }
 
         .hero-text {
@@ -195,6 +206,12 @@
             max-width: 500px;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .hero-img-container {
             flex: 1;
             display: flex;
@@ -202,21 +219,15 @@
             position: relative;
             min-width: 300px;
             margin-bottom: 30px;
-            /* Adjusted spacing */
         }
 
-        /* UPDATED: CIRCULAR IMAGE STYLES */
         .hero-img {
             width: 400px;
-            /* Must be square */
             height: 400px;
-            /* Must be square */
             object-fit: cover;
             border-radius: 50%;
-            /* Makes it a circle */
             z-index: 2;
             border: 3px solid var(--primary-color);
-            /* Changed shadow to a glow effect for the circle */
             box-shadow: 0px 0px 30px rgba(0, 230, 118, 0.3);
         }
 
@@ -259,7 +270,6 @@
         .info-item i {
             color: var(--primary-color);
             width: 20px;
-            /* Fixed width for alignment */
         }
 
         /* --- SERVICES (WORK) --- */
@@ -460,6 +470,21 @@
             font-size: 0.9rem;
         }
 
+        .footer-socials {
+            margin-top: 10px;
+        }
+
+        .footer-socials a {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary-color);
+        }
+
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 991px) {
             .hero-title {
@@ -482,7 +507,6 @@
                 padding-top: 120px;
             }
 
-            /* Adjusted image size for mobile */
             .hero-img {
                 width: 280px;
                 height: 280px;
@@ -493,7 +517,10 @@
                 flex-direction: column-reverse;
             }
 
-            /* Ensure image is above text on mobile */
+            .hero-buttons {
+                justify-content: center;
+            }
+
             .about-grid {
                 grid-template-columns: 1fr;
             }
@@ -540,8 +567,8 @@
                     <li><a href="#about" onclick="toggleMenu()">About</a></li>
                     <li><a href="#services" onclick="toggleMenu()">Services</a></li>
                     <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                    <li><a href="#contact" class="btn" style="padding: 8px 20px; color: black;"
-                            onclick="toggleMenu()">Let's Talk</a></li>
+                    <li><a href="#contact" class="btn-white" style="padding: 8px 20px;" onclick="toggleMenu()">Let's
+                            Talk</a></li>
                 </ul>
             </nav>
         </div>
@@ -556,8 +583,14 @@
                     I am Nayan, a freelance developer based in Gujarat. I specialize in creating personal portfolio
                     websites and immersive web experiences for clients to showcase their work to the world.
                 </p>
-                <a href="#contact" class="btn">Hire Me</a>
-                <a href="#projects" class="btn-outline" style="margin-left: 10px;">View Work</a>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Hire Me</a>
+                    <a href="#projects" class="btn-white">View Work</a>
+                    <a href="https://github.com/nayansuva03" target="_blank" class="btn-white"
+                        style="padding: 12px 15px;"><i class="fab fa-github"></i></a>
+                </div>
+
             </div>
             <div class="hero-img-container">
                 <img src="image.jpg" alt="Nayan Profile" class="hero-img">
@@ -582,7 +615,7 @@
                     <p>
                         I am a passionate Game Developer and Web Developer currently focused on creating professional
                         personal portfolio websites for my clients. I use modern tools and AI assistance to bring ideas
-                        to life efficiently, ensuring every project is unique and tailored to your specific needs.
+                        to life efficiently.
                     </p>
                     <div class="info-list">
                         <div class="info-item">
@@ -600,7 +633,7 @@
                             <i class="fas fa-phone"></i> <span><strong>Phone:</strong> +91 9909591501</span>
                         </div>
                     </div>
-                    <a href="#contact" class="btn-outline">Contact Me</a>
+                    <a href="#contact" class="btn-white">Contact Me</a>
                 </div>
             </div>
         </div>
@@ -617,19 +650,19 @@
                     <div class="service-icon"><i class="fas fa-robot"></i></div>
                     <h4>AI-Assisted Web Dev</h4>
                     <p>Building faster and smarter websites by leveraging the power of latest Artificial Intelligence
-                        tools to optimize code and design workflows.</p>
+                        tools.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-swatchbook"></i></div>
-                    <h4>Portfolio Creation & Customization</h4>
-                    <p>I create and fully customize personal portfolio websites according to your specific requirements
-                        to match your brand identity.</p>
+                    <h4>Portfolio Creation</h4>
+                    <p>I create and fully customize personal portfolio websites according to your specific requirements.
+                    </p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-bug-slash"></i></div>
-                    <h4>Bug Fixing & Changes</h4>
-                    <p>Having trouble with your current site? I identify and fix bugs, make necessary changes, and
-                        ensure smooth functionality based on client requests.</p>
+                    <h4>Bug Fixing</h4>
+                    <p>I identify and fix bugs, make necessary changes, and ensure smooth functionality based on client
+                        requests.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fab fa-figma"></i></div>
@@ -648,54 +681,64 @@
                 <h2 class="section-title">Recent <span>Projects</span></h2>
             </div>
             <div class="projects-grid">
+
                 <div class="project-card">
-                    <div class="project-img"><i class="fas fa-gamepad"></i></div>
+                    <div class="project-img"><i class="fas fa-cloud-sun-rain" style="color: #64b5f6;"></i></div>
                     <div class="project-info">
-                        <h4>Gaming Community Portal</h4>
-                        <p>A dynamic hub for gamers with profiles and news feed.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <h4>WEATHER APP</h4>
+                        <p>Built with JavaScript, fetching live weather data.</p>
+                        <a href="https://nayansuva03.github.io/weather_app/" target="_blank" class="project-link">View
+                            Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-img"><i class="fas fa-palette"></i></div>
+                    <div class="project-img"><i class="fas fa-money-bill-wave" style="color: #81c784;"></i></div>
                     <div class="project-info">
-                        <h4>Artist Portfolio Site</h4>
-                        <p>A minimalist gallery portfolio for a digital artist.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <h4>CURRENCY CONVERTER</h4>
+                        <p>Real-time currency exchange calculator.</p>
+                        <a href="https://nayansuva03.github.io/currency-converter/" target="_blank"
+                            class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-img"><i class="fas fa-code"></i></div>
+                    <div class="project-img"><i class="fas fa-gamepad" style="color: #e57373;"></i></div>
                     <div class="project-info">
-                        <h4>Developer Resume Site</h4>
-                        <p>A clean, responsive online CV and skills showcase.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <h4>TIC TAC TOE GAME</h4>
+                        <p>With two modes: PvC and PvP.</p>
+                        <a href="https://tictectoe-nayansuva.netlify.app/" target="_blank" class="project-link">View
+                            Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
                 <div class="project-card">
                     <div class="project-img"><i class="fas fa-camera-retro"></i></div>
                     <div class="project-info">
                         <h4>Photography Showcase</h4>
                         <p>A full-screen image slider portfolio for a photographer.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <span class="project-link">Coming Soon...</span>
                     </div>
                 </div>
+
                 <div class="project-card">
                     <div class="project-img"><i class="fas fa-briefcase"></i></div>
                     <div class="project-info">
                         <h4>Small Business Landing Page</h4>
                         <p>A conversion-focused single page for local services.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <span class="project-link">Coming Soon...</span>
                     </div>
                 </div>
+
                 <div class="project-card">
                     <div class="project-img"><i class="fas fa-layer-group"></i></div>
                     <div class="project-info">
                         <h4>SaaS Product Page</h4>
                         <p>Modern landing page demonstrating a software product.</p>
-                        <a href="#" class="project-link">View Details <i class="fas fa-arrow-right"></i></a>
+                        <span class="project-link">Coming Soon...</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -712,7 +755,7 @@
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email Me</h4>
-                            <p style="word-break: break-all;">nayan.suva.ahir.0369@gmail.com</p>
+                            <p style="word-break: break-all;">nayansuva27@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-card">
@@ -731,11 +774,9 @@
                     </div>
                 </div>
 
-                <form class="contact-form" action="https://formsubmit.co/nayan.suva.ahir.0369@gmail.com" method="POST">
+                <form class="contact-form" action="https://formsubmit.co/nayansuva27@gmail.com" method="POST">
                     <input type="text" name="_honey" style="display:none">
-
                     <input type="hidden" name="_captcha" value="false">
-
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                     </div>
@@ -758,6 +799,11 @@
         <div class="container">
             <p>&copy; 2024 Nayan. All Rights Reserved. Designed with <i class="fas fa-heart"
                     style="color:var(--primary-color)"></i> in Junagadh, Gujarat.</p>
+            <div class="footer-socials">
+                <a href="https://github.com/nayansuva03" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </footer>
 
